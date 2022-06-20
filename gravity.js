@@ -1,3 +1,6 @@
+// F(in Newtons) = M(in KGs) * A => 9.8 m/s
+
+
 class Entity {
   constractor(entityInfo) {
     this.name = entityInfo.name;
