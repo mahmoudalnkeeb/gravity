@@ -1,26 +1,31 @@
-// F(in Newtons) = M(in KGs) * A => 9.8 m/s
-
+// F(in Newtons) = M(in KGs) * A =>9.8 m/s
+let gameContainer = document.getElementById('game-container');
 
 class Entity {
-  constractor(entityInfo) {
+  constructor(entityInfo) {
     this.name = entityInfo.name;
-    this.position.y = entityInfo.positionY;
-    this.position.x = entityInfo.positionX;
+    this.positionY = entityInfo.positionY;
+    this.positionX = entityInfo.positionX;
     this.width = entityInfo.width;
     this.height = entityInfo.height;
     this.mass = entityInfo.mass;
-    this.color = entityInfo.color
+    this.color = entityInfo.color;
+    this.info = entityInfo;
   }
-  renderEntity(){
-    const e = document.createElement('div')
-    e.classList.add(this.name)
-    e.style.width = this.width + 'px'
-    e.style.height = this.height + 'px'
-    e.style.backgroundColor = this.color
+  renderEntity() {
+    const e = document.createElement('div');
+    e.classList.add(this.name);
+    e.style.width = this.width + 'px';
+    e.style.height = this.height + 'px';
+    e.style.top = this.positionY + 'px';
+    e.style.left = this.positionX + 'px';
+    e.style.backgroundColor = this.color;
+    console.log(this.info);
+    return e;
   }
 }
 class Game {
-  constractor(frames, gravity = 9.8) {
+  constructor(frames, gravity = 9.8) {
     this.frames = frames;
     this.gravity = gravity;
   }
@@ -33,3 +38,14 @@ class Game {
     this.animate(() => {});
   }
 }
+let entityInfo = {
+  name: 'player-entity',
+  positionX: 0,
+  positionY: 0,
+  width: 50,
+  height: 50,
+  mass: 1,
+  color: 'red',
+};
+let player = new Entity(entityInfo);
+gameContainer.appendChild(player.renderEntity());
