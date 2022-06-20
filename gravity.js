@@ -47,7 +47,7 @@ class Game {
         color: 'green',
       };
       aPerTime += this.a / this.frames;
-      console.log(aPerTime);
+      // console.log(aPerTime);
       let playerEntity = new Entity(entityInfo);
       let player = playerEntity.renderEntity();
       if (posY >= this.ground) {
@@ -55,7 +55,6 @@ class Game {
       } else {
         posY = posY + aPerTime;
       }
-      // console.log(posY);
       gameContainer.appendChild(player);
     });
   }
