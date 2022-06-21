@@ -1,6 +1,7 @@
 // F(in Newtons) = M(in KGs) * A =>9.8 m/s
 let gameContainer = document.getElementById('game-container');
-
+let playerHeight = 150;
+let playerWidth = 75;
 class Entity {
   constructor(entityInfo) {
     this.name = entityInfo.name;
@@ -17,7 +18,8 @@ class Entity {
     e.style.width = this.width + 'px';
     e.style.height = this.height + 'px';
     e.style.top = this.positionY + 'px';
-    e.style.left = this.positionX + 'px';
+    e.style.left = this.positionX + '%';
+    e.style.transform = 'translateX(-50%)';
     e.style.backgroundColor = this.color;
     return e;
   }
@@ -34,18 +36,20 @@ class Game {
     }, 1000 / this.frames);
   }
   gravity() {
-    let posY = 10;
     let aPerTime = this.a / this.frames;
+    let posY = 10;
     this.animate(() => {
       gameContainer.innerHTML = '';
+
       let entityInfo = {
         name: 'player-entity',
-        positionX: 10,
+        positionX: 50,
         positionY: posY,
-        width: 50,
-        height: 50,
+        width: playerWidth,
+        height: playerHeight,
         color: 'green',
       };
+      
       aPerTime += this.a / this.frames;
       // console.log(aPerTime);
       let playerEntity = new Entity(entityInfo);
@@ -59,6 +63,6 @@ class Game {
     });
   }
 }
-let ground = gameContainer.offsetHeight - 50;
+let ground = gameContainer.offsetHeight - playerHeight;
 let world = new Game(60, 9.8, ground);
 world.gravity();
